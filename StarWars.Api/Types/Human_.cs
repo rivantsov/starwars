@@ -11,7 +11,7 @@ namespace StarWars.Api {
 
     /// <summary>The ID of the human </summary>
     [Scalar("ID")]
-    public string ID { get; set; }
+    public string Id { get; set; }
 
     /// <summary>What this human calls themselves </summary>
     public string Name { get; set; }

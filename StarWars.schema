@@ -48,7 +48,7 @@ enum Emojis {
 interface Character {
 
   "The ID of the character"
-  iD: ID!
+  id: ID!
 
   "The name of the character"
   name: String!
@@ -82,7 +82,7 @@ type Human implements Character {
   height (unit: LengthUnit! = METER): Float
 
   "The ID of the human"
-  iD: ID!
+  id: ID!
 
   "What this human calls themselves"
   name: String!
@@ -108,7 +108,7 @@ type Human implements Character {
 type Droid implements Character {
 
   "The ID of the droid"
-  iD: ID!
+  id: ID!
 
   "What others call this droid"
   name: String!
@@ -129,7 +129,7 @@ type Starship {
   length (unit: LengthUnit! = METER): Float
 
   "The ID of the starship"
-  iD: ID!
+  id: ID!
 
   "The name of the starship"
   name: String!

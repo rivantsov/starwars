@@ -10,7 +10,7 @@ namespace StarWars.Api {
   public class Starship_ {
     /// <summary>The ID of the starship </summary>
     [Scalar("ID")]
-    public string ID { get; set; }
+    public string Id { get; set; }
 
     /// <summary>The name of the starship </summary>
     public string Name { get; set; }

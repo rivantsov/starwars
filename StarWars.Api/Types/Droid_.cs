@@ -10,7 +10,7 @@ namespace StarWars.Api {
   public class Droid_ : ICharacter_ {
     /// <summary>The ID of the droid</summary>
     [Scalar("ID")]
-    public string ID { get; set; }
+    public string Id { get; set; }
 
     /// <summary>What others call this droid</summary>
     public string Name { get; set; }

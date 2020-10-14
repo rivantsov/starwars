@@ -11,7 +11,7 @@ namespace StarWars.Api {
 
     /// <summary>The ID of the character </summary>
     [Scalar("ID")]
-    string ID { get; set; }
+    string Id { get; set; }
 
     /// <summary>The name of the character </summary>
     string Name { get; set; }
