@@ -54,6 +54,7 @@ namespace StarWars.HttpServer {
       var app = new StarWarsApp();
       var starWarsApi = new StarWarsApi(app);
       var starWarsServer = new GraphQLServer(starWarsApi);
+      starWarsServer.Settings.Options = GraphQLServerOptions.DefaultProd;
       starWarsServer.Initialize();
       StarWarsHttpServer = new GraphQLHttpServer(starWarsServer);
       StartWebHost();
