@@ -9,11 +9,15 @@ namespace StarWars {
 
     private void InitData() {
       // Starships
-      var s0 = new Starship() { Id = "3000", Name = "Millenium Falcon", Length = 34.37f };
-      var s1 = new Starship() { Id = "3001", Name = "X-Wing", Length = 12.5f };
-      var s2 = new Starship() { Id = "3002", Name = "TIE Advanced x1", Length = 9.2f };
-      var s3 = new Starship() { Id = "3003", Name = "Imperial shuttle", Length = 20 };
-      Starships.AddRange(new[] { s0, s1, s2, s3 });
+      var s0 = new Starship() { Id = "3000", Name = "Millenium Falcon", Length = 34.37f, 
+        Coordinates = MakeCoords(12.0f, 43.0f, 0.17f, 245.1f) };
+      var s1 = new Starship() { Id = "3001", Name = "X-Wing", Length = 12.5f,
+        Coordinates = MakeCoords(44.0f, 8.0f, 77.22f, 20.01f) };      
+      var s2 = new Starship() { Id = "3002", Name = "TIE Advanced x1", Length = 9.2f,
+        Coordinates = MakeCoords(52.03f, 24.301f, 400.17f, 913.366f) };
+      var s3 = new Starship() { Id = "3003", Name = "Imperial shuttle", Length = 20,
+      Coordinates = MakeCoords(512.0f, 0.013f, 62.82f, 5.99f) };
+    Starships.AddRange(new[] { s0, s1, s2, s3 });
 
       var allEpisodes = new[] { Episode.Empire, Episode.Jedi, Episode.Newhope };
       // Humans
@@ -58,6 +62,12 @@ namespace StarWars {
       CreateReview(Episode.Newhope, 4, "Could be better", Emojis.Like | Emojis.Smile);
 
     }// method
+
+    private float[][] MakeCoords (float x0, float x1, float x2, float x3) {
+      return new float[][] {
+        new [] {x0, x1}, new [] {x2, x3}
+      };
+    }
 
   }
 }

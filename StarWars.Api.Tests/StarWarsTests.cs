@@ -19,7 +19,7 @@ namespace StarWars.Tests
       string query;
       GraphQLResponse resp;
 
-      query = @" query { starships{name, length} } ";
+      query = @" query { starships{name, length coordinates} } ";
       resp = await TestEnv.ExecuteAsync(query);
       var ships = resp.Data.GetValue<IList>("starships");
       Assert.AreEqual(4, ships.Count, "expected 4 ships");
