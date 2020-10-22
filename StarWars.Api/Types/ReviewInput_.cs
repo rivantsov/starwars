@@ -6,7 +6,7 @@ using NGraphQL.CodeFirst;
 namespace StarWars.Api {
 
   /// <summary>The input object sent when someone is creating a new review </summary>
-  [InputType]
+  [InputType, GraphQLName("ReviewInput")] //example of explicit name assignment
   public class ReviewInput_ {
 
     /// <summary>0-5 stars </summary>

@@ -1,7 +1,9 @@
 ## NGraphQL StarWars Example
-StarWars is a sample project implementing StarWars-themed API widely used in GraphQL documentation and guides. The project demonstrates building GraphQL APIs in .NET/c# using NGraphQL library: https://github.com/rivantsov/ngraphql . 
+StarWars is a sample project implementing StarWars-themed API widely used in GraphQL documentation and guides. The project demonstrates building GraphQL APIs in .NET/c# using [NGraphQL library](https://github.com/rivantsov/ngraphql). 
 
-The GraphQL API is described by the [schema document StarWars.schema](https://github.com/rivantsov/starwars/blob/master/StarWars.schema) in the root folder. 
+Documentation: [StarWars sample developer guide](https://github.com/rivantsov/starwars/wiki)
+
+The GraphQL API is described by this [Star Wars schema document](https://github.com/rivantsov/starwars/blob/master/StarWars.schema) in the root folder. 
 
 ### Exploring the code
 Open the solution in Visual Studio, compile, run tests in StarWars.Api.Tests project. The tests write full log of operations into **_starWarsTests.log** - request, response as Json. After running the tests find this file in the *bin/../ folder*, open it in text editor and follow the test actions - request/response, etc. 
