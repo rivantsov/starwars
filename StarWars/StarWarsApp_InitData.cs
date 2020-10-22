@@ -19,7 +19,7 @@ namespace StarWars {
       Coordinates = MakeCoords(512.0f, 0.013f, 62.82f, 5.99f) };
     Starships.AddRange(new[] { s0, s1, s2, s3 });
 
-      var allEpisodes = new[] { Episode.Empire, Episode.Jedi, Episode.Newhope };
+      var allEpisodes = new[] { Episode.Empire, Episode.Jedi, Episode.NewHope };
       // Humans
       var luke = new Human() { Id = "1000", Name = "Luke Skywalker", AppearsIn = allEpisodes, HomePlanet = "Tatooine",
         Height = 1.72f, MassKg = 77,
@@ -37,7 +37,7 @@ namespace StarWars {
         Height = 1.5f, MassKg = 49,
         Starships = new Starship[] {}
       };
-      var wilhuff = new Human() { Id = "1004", Name = "Wilhuff Tarkin", AppearsIn = new[] { Episode.Newhope }, Height = 1.8f,
+      var wilhuff = new Human() { Id = "1004", Name = "Wilhuff Tarkin", AppearsIn = new[] { Episode.NewHope }, Height = 1.8f,
         Starships = new Starship[] { }
       };
 
@@ -59,7 +59,7 @@ namespace StarWars {
       // reviews
       CreateReview(Episode.Empire, 2, "Booooring", Emojis.Bored | Emojis.Dislike);
       CreateReview(Episode.Jedi, 5, "Fabulous!", Emojis.Excited | Emojis.Like);
-      CreateReview(Episode.Newhope, 4, "Could be better", Emojis.Like | Emojis.Smile);
+      CreateReview(Episode.NewHope, 4, "Could be better", Emojis.Like | Emojis.Smile);
 
     }// method
 

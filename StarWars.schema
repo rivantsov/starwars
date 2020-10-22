@@ -10,7 +10,7 @@ scalar Uuid
 enum Episode {
 
   "Star Wars Episode IV: A New Hope, released in 1977."
-  NEWHOPE
+  NEW_HOPE
 
   "Star Wars Episode V: The Empire Strikes Back, released in 1980."
   EMPIRE

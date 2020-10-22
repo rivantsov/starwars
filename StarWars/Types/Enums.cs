@@ -5,7 +5,7 @@ namespace StarWars {
   /// <summary>The episodes in the Star Wars trilogy</summary>
   public enum Episode {
     /// <summary>Star Wars Episode IV: A New Hope, released in 1977. </summary>
-    Newhope,
+    NewHope,
     
     /// <summary>Star Wars Episode V: The Empire Strikes Back, released in 1980. </summary>
     Empire,
@@ -29,6 +29,7 @@ namespace StarWars {
   /// </summary>
   [Flags]
   public enum Emojis {
+
     None = 0, 
 
     Like = 1, 
