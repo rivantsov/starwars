@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using NGraphQL.CodeFirst;
 
 namespace StarWars.Api {
@@ -27,7 +28,9 @@ namespace StarWars.Api {
       return _app.GetStarships();
     }
 
-    public Starship GetStarship(IFieldContext fieldContext, string id) {
+    // example of async method
+    public async Task<Starship> GetStarshipAsync(IFieldContext fieldContext, string id) {
+      await Task.Delay(10); 
       return _app.GetStarship(id);
     }
 

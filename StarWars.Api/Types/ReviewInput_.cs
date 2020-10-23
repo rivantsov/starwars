@@ -13,6 +13,7 @@ namespace StarWars.Api {
     public int Stars;
 
     /// <summary>Comment about the movie, optional </summary>
+    [Null]
     public string Commentary;
 
     public Emojis Emojis; 

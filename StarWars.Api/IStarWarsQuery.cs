@@ -8,13 +8,13 @@ namespace StarWars.Api {
   [Query]
   interface IStarWarsQuery {
 
-    [GraphQLName("episodes"), Resolver("GetEpisodes")]
+    [Resolver("GetEpisodes")]
     Episode Episodes { get; }
 
-    [GraphQLName("starships"), Resolver("GetStarships")]
+    [Resolver("GetStarships")]
     IList<Starship_> Starships { get; }
 
-    [GraphQLName("starship")]
+    [GraphQLName("starship"), Resolver(nameof(StarWarsResolvers.GetStarshipAsync))]
     Starship_ GetStarship([Scalar("ID")] string id);
 
     [GraphQLName("characters")]
