@@ -46,18 +46,22 @@ namespace StarWars.Api {
       return _app.GetReviews(episode); 
     }
 
-    public float? GetHeight(IFieldContext fieldContext, Human human, LengthUnit unit = LengthUnit.Meter) { 
-      if (unit == LengthUnit.Foot)
-        return human.Height * 3.28f; 
-      else
+    public float? GetHeight(IFieldContext fieldContext, Human human, LengthUnit unit) {
+      if (human.Height == null)
+        return null;
+      else if (unit == LengthUnit.Meter)
         return human.Height;
+      else
+        return human.Height * 3.28f; // feet
     }
 
-    public float? GetLength(IFieldContext fieldContext, Starship starship, LengthUnit unit = LengthUnit.Meter) {
-      if (unit == LengthUnit.Foot)
-        return starship.Length * 3.28f;
-      else
+    public float? GetLength(IFieldContext fieldContext, Starship starship, LengthUnit unit) {
+      if (starship.Length == null)
+        return null;
+      else if (unit == LengthUnit.Meter)
         return starship.Length;
+      else 
+        return starship.Length * 3.28f; // feet
     }
 
     // We return Union instances here, we wrap raw result objects into SearchResult_ objects, 
