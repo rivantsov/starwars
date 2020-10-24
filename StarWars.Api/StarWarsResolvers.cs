@@ -34,11 +34,18 @@ namespace StarWars.Api {
       return _app.GetStarship(id);
     }
 
+    // the field expects type  ICharacter_[] here; but we cannot create instances of ICharacter_
+    //  at runtime. Human_ and Droid_ implement it but we cannot create them, we must return 
+    //  entities (Human or Droid) from resolvers. So for interface return type the engine accepts
+    //  ANY return type (including Object) and will enforce type check at runtime
+    //  We use Character class here, it is pure application-layer type, not registered with API,
+    //  because it is convenient; the engine does not care. 
     public IList<Character> GetCharacters(IFieldContext fieldContext, Episode episode) { 
       return _app.GetCharacters(episode); 
     }
 
-    public Character GetCharacter(IFieldContext fieldContext, string id) {
+    // see comment to GetCharacters. We could return Character but use Object type, as a demo
+    public object GetCharacter(IFieldContext fieldContext, string id) {
       return _app.GetCharacter(id);
     }
 
