@@ -40,14 +40,18 @@ namespace StarWars {
       return Reviews.Where(r => r.Episode == episode).ToList(); 
     }
 
-    public IEnumerable<object> Search(string text) {
+    public IEnumerable<object> Search(string substr) {
       // check characters and starships
       foreach (var ch in Characters)
-        if (ch.Name.Contains(text))
+        if (StringContains(ch.Name, substr))
           yield return ch;
       foreach (var sh in Starships)
-        if (sh.Name.Contains(text))
+        if (StringContains(sh.Name, substr))
           yield return sh; 
+    }
+
+    private bool StringContains(string text, string substr) {
+      return text.IndexOf(substr, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 
     // mutation CreateReview

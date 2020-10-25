@@ -5,6 +5,10 @@ query starshipsAndCharacters {
   characters(episode: JEDI) {name}
 }
 
+query searchQuery {
+  search(text: "d") {__typename, name}
+}
+
 
 query introspectionQueries {
   __type(name: "Droid") { 

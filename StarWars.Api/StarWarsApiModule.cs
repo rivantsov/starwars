@@ -14,6 +14,7 @@ namespace StarWars.Api {
         typeof(ICharacter_), typeof(Human_), typeof(Droid_), 
         typeof(Starship_), typeof(Review_), typeof(SearchResult_), typeof(ReviewInput_)
         );
+      RegisterResolvers(typeof(StarWarsResolvers));
 
       // map app entity types to GraphQL Api types
       MapEntity<Human>().To<Human_>(h => new Human_() {
@@ -25,9 +26,6 @@ namespace StarWars.Api {
       MapEntity<Character>().To<ICharacter_>();
       MapEntity<NamedObject>().ToUnion<SearchResult_>();
       
-      //resolvers
-      RegisterResolvers(typeof(StarWarsResolvers));
-
     } //constructor  
 
   }

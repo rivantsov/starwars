@@ -13,6 +13,5 @@ namespace StarWars.Api {
       MainModule = new StarWarsApiModule(this);
       this.RegisterModule(MainModule); 
     }
-  
   }
 }
