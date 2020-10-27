@@ -21,8 +21,8 @@
       <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
-      <PackageReference Include="NGraphQL" Version="0.9.1" />
-      <PackageReference Include="NGraphQL.Http" Version="0.9.1" />
+      <PackageReference Include="NGraphQL" Version="0.9.3" />
+      <PackageReference Include="NGraphQL.Http" Version="0.9.3" />
     </ItemGroup>
 
     <ItemGroup>

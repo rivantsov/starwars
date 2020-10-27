@@ -90,21 +90,20 @@ namespace StarWars.Api {
       return _app.CreateReview(episode, reviewInput.Stars, reviewInput.Commentary, reviewInput.Emojis); 
     }
 
-    // this is a default, non-batched version, not used - we use batched version instead
-    public IList<Character> GetFriends(IFieldContext fieldContext, Character character) {
-      return character.Friends;
-    }
-
-    // batched version
-    public IList<Character> GetFriendsBatched(IFieldContext fieldContext, Character character) {
-      // batch execution (aka DataLoader); we retrieve all pending parents (characters)
-      //  get all their friend lists as a dictionary, and then post it into context - 
+    // batched version of GetStarships
+    public IList<Starship> GetStarshipsBatched(IFieldContext fieldContext, Human human) {
+      // batch execution (aka DataLoader); we retrieve all pending parents (humans),
+      //  get all their starships to a dictionary, and then post it back into context - 
       //  the engine will use this dictionary to lookup values and will not call resolver anymore
-      var allParents = fieldContext.GetAllParentEntities<Character>();
-      var friendsByCharacter =  _app.GetFriendLists(allParents);
-      fieldContext.SetBatchedResults<Character, IList<Character>>(friendsByCharacter); 
+      var allParents = fieldContext.GetAllParentEntities<Human>();
+      var shipsByHuman = allParents.ToDictionary(h => h, h => h.Starships); //  _app.GetFriendLists(allParents);
+      fieldContext.SetBatchedResults<Human, IList<Starship>>(shipsByHuman);
+      CallCount_GetStarships++; // just for testing, count calls
       return null; // the engine will use batch results dict to lookup the value
     }
+
+    // call count used in testing
+    public static int CallCount_GetStarships;
     
   }
 }

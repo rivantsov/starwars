@@ -17,7 +17,6 @@ namespace StarWars.Api {
     public string Name { get; set; }
 
     /// <summary>This human&apos;s friends, or an empty list if they have none </summary>
-    [Resolver(nameof(StarWarsResolvers.GetFriendsBatched))] // resolver performs batching (impl of DataLoader)
     public IList<ICharacter_> Friends { get; }
 
     /// <summary>The movies this human appears in </summary>
@@ -34,6 +33,7 @@ namespace StarWars.Api {
     public float? Mass { get; set; }
 
     /// <summary>A list of starships this person has piloted, or an empty list if none </summary>
+    [Resolver(nameof(StarWarsResolvers.GetStarshipsBatched))] 
     public IList<Starship_> Starships { get; }
 
   }

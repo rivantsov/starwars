@@ -4,9 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StarWars.Api.Tests;
 using NGraphQL.Utilities;
 using NGraphQL.Server;
+using System.Collections.Generic;
+using StarWars.Api;
 
-namespace StarWars.Tests
-{
+namespace StarWars.Tests {
+  using TDict = IDictionary<string, object>;
+
   [TestClass]
   public class StarWarsTests {
     [TestInitialize]
@@ -42,6 +45,26 @@ namespace StarWars.Tests
       var leiaFriends = resp.Data.GetValue<IList>("leia.friends");
       Assert.AreEqual(4, leiaFriends.Count, "Expected 4 friends");
 
+    }
+
+    [TestMethod]
+    public async Task TestBatching() {
+      string query;
+      GraphQLResponse resp;
+      // characters with starships (on humans only)
+      query = @" {
+  charList: characters(episode: JEDI) { 
+    name
+    ... on Human { 
+      starships { name }
+    }    
+  }
+}";
+      StarWarsResolvers.CallCount_GetStarships = 0; //reset the counter
+      resp = await TestEnv.ExecuteAsync(query);
+      var charList = resp.Data.GetValue<IList>("charList");
+      Assert.IsTrue(charList.Count > 0);
+      Assert.AreEqual(1, StarWarsResolvers.CallCount_GetStarships, "Expected 1 call to resolver");
     }
 
     [TestMethod]

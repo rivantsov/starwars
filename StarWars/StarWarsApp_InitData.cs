@@ -16,8 +16,8 @@ namespace StarWars {
       var s2 = new Starship() { Id = "3002", Name = "TIE Advanced x1", Length = 9.2f,
         Coordinates = MakeCoords(52.03f, 24.301f, 400.17f, 913.366f) };
       var s3 = new Starship() { Id = "3003", Name = "Imperial shuttle", Length = 20,
-      Coordinates = MakeCoords(512.0f, 0.013f, 62.82f, 5.99f) };
-    Starships.AddRange(new[] { s0, s1, s2, s3 });
+        Coordinates = MakeCoords(512.0f, 0.013f, 62.82f, 5.99f) };
+      Starships.AddRange(new[] { s0, s1, s2, s3 });
 
       var allEpisodes = new[] { Episode.Empire, Episode.Jedi, Episode.NewHope };
       // Humans
