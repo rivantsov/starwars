@@ -63,7 +63,9 @@ namespace StarWars.Tests {
       StarWarsResolvers.CallCount_GetStarships = 0; //reset the counter
       resp = await TestEnv.ExecuteAsync(query);
       var charList = resp.Data.GetValue<IList>("charList");
-      Assert.IsTrue(charList.Count > 0);
+      Assert.IsTrue(charList.Count >= 4, "at least 4 characters expected"); 
+      // there are 4 humans in the list, each has 'starships' field, but there was only one call to the resolver;
+      //  the resolver performed batched retrieval
       Assert.AreEqual(1, StarWarsResolvers.CallCount_GetStarships, "Expected 1 call to resolver");
     }
 
