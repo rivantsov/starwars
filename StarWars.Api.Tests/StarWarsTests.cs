@@ -52,7 +52,8 @@ namespace StarWars.Tests {
       string query;
       GraphQLResponse resp;
       // characters with starships (on humans only)
-      query = @" {
+      query = @"
+qyery {
   charList: characters(episode: JEDI) { 
     name
     ... on Human { 
