@@ -1,3 +1,6 @@
+## Welcome to GraphQL on .NET!
+[NGraphQL](https://github.com/rivantsov/ngraphql) is a framework for building **GraphQL** servers on .NET platform.
+
 ## NGraphQL StarWars Example
 StarWars is a sample project implementing StarWars-themed API widely used in GraphQL documentation and guides. The project demonstrates building GraphQL APIs in .NET/c# using [NGraphQL library](https://github.com/rivantsov/ngraphql). 
 
