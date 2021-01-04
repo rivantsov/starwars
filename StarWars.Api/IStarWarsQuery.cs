@@ -5,7 +5,6 @@ using NGraphQL.CodeFirst;
 
 namespace StarWars.Api {
 
-  [Query]
   interface IStarWarsQuery {
 
     [Resolver("GetEpisodes")]

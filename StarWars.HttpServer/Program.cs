@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-using NGraphQL.Http;
+using NGraphQL;
 using NGraphQL.Server;
-using NGraphQL.Server.Execution;
+using NGraphQL.Server.Http;
 using StarWars.Api;
 
 namespace StarWars.HttpServer {
@@ -27,7 +27,7 @@ namespace StarWars.HttpServer {
         Initialize();
         Console.WriteLine("Server started at " + ServiceUrl);
         // printout schema doc
-        var schemaDoc = StarWarsHttpServer.Server.Api.Model.SchemaDoc;
+        var schemaDoc = StarWarsHttpServer.Server.Model.SchemaDoc;
         File.WriteAllText(SchemaFilePath, schemaDoc);
         Console.WriteLine($"  StarWars Schema document saved in {SchemaFilePath}");
         Console.WriteLine($"  Sample URL to try in browser:  {SampleUrl}");
@@ -52,8 +52,9 @@ namespace StarWars.HttpServer {
 
       // create server and Http graphQL server 
       var app = new StarWarsApp();
-      var starWarsApi = new StarWarsApi(app);
-      var starWarsServer = new GraphQLServer(starWarsApi);
+      var starWarsServer = new GraphQLServer(app);
+      var starWarsModule = new StarWarsApiModule();
+      starWarsServer.RegisterModules(starWarsModule);
       starWarsServer.Settings.Options = GraphQLServerOptions.DefaultProd;
       starWarsServer.Initialize();
       StarWarsHttpServer = new GraphQLHttpServer(starWarsServer);

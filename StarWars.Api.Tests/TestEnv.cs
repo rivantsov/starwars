@@ -6,10 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+
+using NGraphQL;
 using NGraphQL.CodeFirst;
-using NGraphQL.Model;
 using NGraphQL.Server;
-using NGraphQL.Server.Execution;
 
 namespace StarWars.Api.Tests {
 
@@ -26,13 +26,13 @@ namespace StarWars.Api.Tests {
       if (File.Exists(LogFilePath))
         File.Delete(LogFilePath);
       var app = new StarWarsApp();
-      var api = new StarWarsApi(app);
-      StarWarsServer = new GraphQLServer(api);
+      StarWarsServer = new GraphQLServer(app);
+      var apiModule = new StarWarsApiModule();
+      StarWarsServer.RegisterModules(apiModule);
       StarWarsServer.Initialize();
 
       // Printout schema
-      var schemaGen = new SchemaDocGenerator();
-      var schemaDoc = schemaGen.GenerateSchema(api.Model);
+      var schemaDoc = StarWarsServer.Model.SchemaDoc;
       File.WriteAllText("_starWarsSchema.txt", schemaDoc);
 
       _serializerSettings = new JsonSerializerSettings() {

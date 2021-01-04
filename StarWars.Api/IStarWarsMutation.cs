@@ -5,7 +5,6 @@ using NGraphQL.CodeFirst;
 
 namespace StarWars.Api {
 
-  [Mutation]
   public interface IStarWarsMutation {
     Review_ CreateReview(Episode episode, ReviewInput_ reviewInput);
   }

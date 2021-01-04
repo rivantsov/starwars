@@ -13,8 +13,7 @@ namespace StarWars.Api {
     // Begin/end request method
     public void BeginRequest(IRequestContext request) {
       // Get app instance
-      var swApi = (StarWarsApi)request.Server.Api;
-      _app = swApi.App;
+      _app = (StarWarsApp) request.App;
     }
 
     public void EndRequest(IRequestContext request) {

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StarWars.Api.Tests;
-using NGraphQL.Utilities;
-using NGraphQL.Server;
 using System.Collections.Generic;
-using StarWars.Api;
 
-namespace StarWars.Tests {
+using NGraphQL;
+using NGraphQL.Server;
+using NGraphQL.Utilities;
+
+namespace StarWars.Api.Tests {
   using TDict = IDictionary<string, object>;
 
   [TestClass]
@@ -21,6 +21,14 @@ namespace StarWars.Tests {
     public async Task TestBasicQueries() {
       string query;
       GraphQLResponse resp;
+
+      {
+        query = @" query { starships{name, length coordinates} } ";
+        var respD = await TestEnv.ExecuteAsync(query);
+        var ships0Name = respD.Data.GetValue<string>("starships/#0/name");
+        Assert.IsNotNull(ships0Name, "expected name");
+      }
+
 
       query = @" query { starships{name, length coordinates} } ";
       resp = await TestEnv.ExecuteAsync(query);

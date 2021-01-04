@@ -6,15 +6,16 @@ using NGraphQL.CodeFirst;
 namespace StarWars.Api {
 
   public class StarWarsApiModule: GraphQLModule {
-    public StarWarsApiModule(GraphQLApi api): base(api) {
+    public StarWarsApiModule() {
       // Register types
-      RegisterTypes(
-        typeof(IStarWarsQuery), typeof(IStarWarsMutation),
-        typeof(Episode), typeof(LengthUnit), typeof(Emojis),
-        typeof(ICharacter_), typeof(Human_), typeof(Droid_), 
-        typeof(Starship_), typeof(Review_), typeof(SearchResult_), typeof(ReviewInput_)
-        );
-      RegisterResolvers(typeof(StarWarsResolvers));
+      this.EnumTypes.AddRange(new Type[] { typeof(Episode), typeof(LengthUnit), typeof(Emojis) });
+      this.ObjectTypes.AddRange(new Type[] { typeof(Human_), typeof(Droid_), typeof(Starship_), typeof(Review_) });
+      this.InterfaceTypes.Add(typeof(ICharacter_));
+      this.UnionTypes.Add(typeof(SearchResult_));
+      this.InputTypes.Add(typeof(ReviewInput_));
+      this.QueryType = typeof(IStarWarsQuery);
+      this.MutationType = typeof(IStarWarsMutation);
+      this.ResolverTypes.Add(typeof(StarWarsResolvers));
 
       // map app entity types to GraphQL Api types
       MapEntity<Human>().To<Human_>(h => new Human_() {
@@ -23,8 +24,8 @@ namespace StarWars.Api {
       MapEntity<Droid>().To<Droid_>();
       MapEntity<Starship>().To<Starship_>();
       MapEntity<Review>().To<Review_>();
-      MapEntity<Character>().To<ICharacter_>();
-      MapEntity<NamedObject>().ToUnion<SearchResult_>();
+      // MapEntity<Character>().To<ICharacter_>();
+      // MapEntity<NamedObject>().ToUnion<SearchResult_>();
       
     } //constructor  
 
