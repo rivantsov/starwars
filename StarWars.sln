@@ -7,21 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarWars", "StarWars\StarWa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarWars.Api", "StarWars.Api\StarWars.Api.csproj", "{66956CA6-E6FF-4A77-B59E-CF894FC7B595}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarWars.Api.Tests", "StarWars.Api.Tests\StarWars.Api.Tests.csproj", "{E87D0347-81F6-4A3F-88AC-FB1C4C479C50}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarWars.HttpServer", "StarWars.HttpServer\StarWars.HttpServer.csproj", "{3E5BEC52-7936-457F-BDAB-F9596268FF89}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphiql", "Graphiql", "{CEEA6999-E6E0-48AE-9723-4AF0DD587B4F}"
-	ProjectSection(SolutionItems) = preProject
-		Graphiql\graphiql.html = Graphiql\graphiql.html
-		Graphiql\SampleQueries.txt = Graphiql\SampleQueries.txt
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2747EAA3-4FAF-4464-9774-ED80A5951865}"
 	ProjectSection(SolutionItems) = preProject
 		ReadMe.md = ReadMe.md
 		StarWars.schema = StarWars.schema
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarWars.Tests", "StarWars.Tests\StarWars.Tests.csproj", "{72C3D966-F5B1-4A25-AC7A-79BDD395B9C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +29,10 @@ Global
 		{66956CA6-E6FF-4A77-B59E-CF894FC7B595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66956CA6-E6FF-4A77-B59E-CF894FC7B595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66956CA6-E6FF-4A77-B59E-CF894FC7B595}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E87D0347-81F6-4A3F-88AC-FB1C4C479C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E87D0347-81F6-4A3F-88AC-FB1C4C479C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E87D0347-81F6-4A3F-88AC-FB1C4C479C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E87D0347-81F6-4A3F-88AC-FB1C4C479C50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E5BEC52-7936-457F-BDAB-F9596268FF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E5BEC52-7936-457F-BDAB-F9596268FF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E5BEC52-7936-457F-BDAB-F9596268FF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E5BEC52-7936-457F-BDAB-F9596268FF89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C3D966-F5B1-4A25-AC7A-79BDD395B9C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C3D966-F5B1-4A25-AC7A-79BDD395B9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C3D966-F5B1-4A25-AC7A-79BDD395B9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C3D966-F5B1-4A25-AC7A-79BDD395B9C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

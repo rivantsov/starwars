@@ -6,38 +6,41 @@ using System.Collections.Generic;
 using NGraphQL;
 using NGraphQL.Server;
 using NGraphQL.Utilities;
+using StarWars.Api;
+using NGraphQL.Client;
 
-namespace StarWars.Api.Tests {
+namespace StarWars.Tests {
   using TDict = IDictionary<string, object>;
 
   [TestClass]
   public class StarWarsTests {
     [TestInitialize]
     public void TestInit() {
-      TestEnv.Init();
+      TestEnv.Initialize();
     }
 
     [TestMethod]
     public async Task TestBasicQueries() {
       string query;
-      GraphQLResponse resp;
+      ResponseData resp;
+
 
       {
         query = @" query { starships{name, length coordinates} } ";
-        var respD = await TestEnv.ExecuteAsync(query);
-        var ships0Name = respD.Data.GetValue<string>("starships/#0/name");
+        var respD = await TestEnv.Client.PostAsync(query);
+        var ships0Name = respD.data.starships[0].name;
         Assert.IsNotNull(ships0Name, "expected name");
       }
 
 
       query = @" query { starships{name, length coordinates} } ";
-      resp = await TestEnv.ExecuteAsync(query);
-      var ships = resp.Data.GetValue<IList>("starships");
+      resp = await TestEnv.Client.PostAsync(query);
+      var ships = resp.data.starships;
       Assert.AreEqual(4, ships.Count, "expected 4 ships");
 
       query = @" query { starship(id: ""3001"") {name, length} } ";
-      resp = await TestEnv.ExecuteAsync(query);
-      var shipName = resp.Data.GetValue<string>("starship.name");
+      resp = await TestEnv.Client.PostAsync(query);
+      var shipName = resp.data.GetValue<string>("starship.name");
       Assert.AreEqual("X-Wing", shipName);
 
       // character query with friends
@@ -47,10 +50,10 @@ namespace StarWars.Api.Tests {
     friends { name }
   }
 }";
-      resp = await TestEnv.ExecuteAsync(query);
-      var lname = resp.Data.GetValue<string>("leia.name");
+      resp = await TestEnv.Client.PostAsync(query);
+      var lname = resp.data.leia.name;
       Assert.AreEqual("Leia Organa", lname);
-      var leiaFriends = resp.Data.GetValue<IList>("leia.friends");
+      var leiaFriends = resp.data.leia.friends;
       Assert.AreEqual(4, leiaFriends.Count, "Expected 4 friends");
 
     }
@@ -58,7 +61,7 @@ namespace StarWars.Api.Tests {
     [TestMethod]
     public async Task TestBatching() {
       string query;
-      GraphQLResponse resp;
+      ResponseData resp;
       // characters with starships (on humans only)
       query = @"
 query {
@@ -70,8 +73,8 @@ query {
   }
 }";
       StarWarsResolvers.CallCount_GetStarships = 0; //reset the counter
-      resp = await TestEnv.ExecuteAsync(query);
-      var charList = resp.Data.GetValue<IList>("charList");
+      resp = await TestEnv.Client.PostAsync(query);
+      var charList = resp.data.charList;
       Assert.IsTrue(charList.Count >= 4, "at least 4 characters expected"); 
       // there are 4 humans in the list, each has 'starships' field, but there was only one call to the resolver;
       //  the resolver performed batched retrieval
@@ -80,7 +83,7 @@ query {
 
     [TestMethod]
     public async Task TestMutation() {
-      GraphQLResponse resp;
+      ResponseData resp;
 
       // get Jedi reviews, add review, check new count
       // 1. Get Jedi reviews, get count
@@ -88,8 +91,8 @@ query {
 {
   reviews( episode: JEDI) { episode, stars, commentary, emojis }
 }";
-      resp = await TestEnv.ExecuteAsync(getReviewsQuery);
-      var jediReviews = resp.Data.GetValue<IList>("reviews");
+      resp = await TestEnv.Client.PostAsync(getReviewsQuery);
+      var jediReviews = resp.data.reviews;
       Assert.IsTrue(jediReviews.Count > 0, "Expected some review");
       var oldReviewsCount = jediReviews.Count;
 
@@ -99,11 +102,11 @@ mutation {
   createReview( episode: JEDI, reviewInput: { stars: 2, commentary: ""could be better"", emojis: [DISLIKE, BORED]}) 
     { episode, stars, commentary, emojis }
 }";
-      resp = await TestEnv.ExecuteAsync(createReviewMut);
+      resp = await TestEnv.Client.PostAsync(createReviewMut);
 
       // 3. Get reviews again and check count
-      resp = await TestEnv.ExecuteAsync(getReviewsQuery);
-      jediReviews = resp.Data.GetValue<IList>("reviews");
+      resp = await TestEnv.Client.PostAsync(getReviewsQuery);
+      jediReviews = resp.data.reviews;
       var newReviewsCount = jediReviews.Count;
       Assert.AreEqual(oldReviewsCount + 1, newReviewsCount, "Expected incremented review count");
     }
@@ -111,7 +114,7 @@ mutation {
     [TestMethod]
     public async Task TestSearch() {
       string query;
-      GraphQLResponse resp;
+      ResponseData resp;
 
       query = @" 
 query { 
@@ -120,8 +123,8 @@ query {
     name, 
   } 
 } ";
-      resp = await TestEnv.ExecuteAsync(query);
-      var results = resp.Data.GetValue<IList>("search");
+      resp = await TestEnv.Client.PostAsync(query);
+      var results = resp.data.search;
       // Luke SkywalkER, Darth VadER, ImpERial shuttle
       Assert.AreEqual(3, results.Count, "expected 3 objects");
     }
