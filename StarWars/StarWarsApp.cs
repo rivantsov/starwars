@@ -16,8 +16,8 @@ namespace StarWars {
       InitData(); 
     }
 
-    public Episode GetAllEpisodes() {
-      return Episode.NewHope | Episode.Empire | Episode.Jedi;
+    public Episode[] GetAllEpisodes() {
+      return new[] { Episode.NewHope, Episode.Empire, Episode.Jedi };
     }
 
     public IList<Starship> GetStarships() {

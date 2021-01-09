@@ -8,7 +8,7 @@ namespace StarWars.Api {
   interface IStarWarsQuery {
 
     [Resolver("GetEpisodes")]
-    Episode Episodes { get; }
+    Episode[] Episodes { get; }
 
     [Resolver("GetStarships")]
     IList<Starship_> Starships { get; }

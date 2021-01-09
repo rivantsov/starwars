@@ -19,7 +19,7 @@ namespace StarWars.Api {
     public void EndRequest(IRequestContext request) {
     }
 
-    public Episode GetEpisodes(IFieldContext fieldContext) {
+    public Episode[] GetEpisodes(IFieldContext fieldContext) {
       return _app.GetAllEpisodes();
     }
 

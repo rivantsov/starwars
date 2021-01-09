@@ -40,7 +40,7 @@ namespace StarWars.Tests {
 
       query = @" query { starship(id: ""3001"") {name, length} } ";
       resp = await TestEnv.Client.PostAsync(query);
-      var shipName = resp.data.GetValue<string>("starship.name");
+      var shipName = resp.data.starship.name;
       Assert.AreEqual("X-Wing", shipName);
 
       // character query with friends
