@@ -1,4 +1,4 @@
-# WARNIN: 
+# WARNING: 
 **This repo accidentally got out of sync with the current version of the NGRaphQL sources/packages - premature push, my apologies.**
 I am working on the fix. Currently you can browse the code but it won't compile or run. 
 
