@@ -97,12 +97,8 @@ namespace StarWars.Api {
       var allParents = fieldContext.GetAllParentEntities<Human>();
       var shipsByHuman = allParents.ToDictionary(h => h, h => h.Starships); //  _app.GetFriendLists(allParents);
       fieldContext.SetBatchedResults<Human, IList<Starship>>(shipsByHuman);
-      CallCount_GetStarships++; // just for testing, count calls
       return null; // the engine will use batch results dict to lookup the value
     }
-
-    // call count used in testing
-    public static int CallCount_GetStarships;
     
   }
 }
