@@ -1,9 +1,10 @@
-## Welcome to GraphQL on .NET!
+# WARNIN: 
+**This repo accidentally got out of sync with the current version of the NGRaphQL sources/packages - premature push, my apologies.**
+I am working on the fix. Currently you can browse the code but it won't compile or run. 
+
+## StarWars Demo App
 [NGraphQL](https://github.com/rivantsov/ngraphql) is a framework for building **GraphQL** servers on .NET platform. 
-
 This repo is a sample Star Wars application and GraphQL API built with NGraphQL. 
-
-Follow this [link for the main NGraphQL repository](https://github.com/rivantsov/ngraphql).
 
 ## NGraphQL StarWars Example
 StarWars is a sample project implementing StarWars-themed API widely used in GraphQL documentation and guides. The project demonstrates building GraphQL APIs in .NET/c# using *NGraphQL* library. 
