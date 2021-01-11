@@ -8,6 +8,7 @@ using NGraphQL.Server;
 using NGraphQL.Utilities;
 using StarWars.Api;
 using NGraphQL.Client;
+using System.Diagnostics;
 
 namespace StarWars.Tests {
   using TDict = IDictionary<string, object>;
@@ -23,20 +24,26 @@ namespace StarWars.Tests {
     public async Task TestBasicQueries() {
       string query;
 
-      query = " query { starships{name, length coordinates} } ";
-      var resp = await TestEnv.Client.PostAsync(query);
-      var ships0Name = resp.data.starships[0].name;
-      Assert.IsNotNull(ships0Name, "expected name");
-
-
-      query = " query { starships{name, length coordinates} } ";
-      resp = await TestEnv.Client.PostAsync(query);
-      var ships = resp.data.starships;
+      query = " query { starships {id, name, length coordinates} } ";
+      var response = await TestEnv.Client.PostAsync(query);
+      var ships = response.data.starships;
       Assert.AreEqual(4, ships.Count, "expected 4 ships");
+      var ship0Name = ships[0].name;
+      Assert.IsNotNull(ship0Name, "expected name");
+      foreach(var sh in ships) {
+        Trace.WriteLine($"Starship {sh.name}, length: {sh.length}");
+      }
+      // Strongly typed objects
+      var shipArr = response.GetTopField<Starship_[]>("starships");
+      Starship_ s0 = shipArr[0];
+      Assert.IsNotNull(s0, "Expected starship object.");
 
-      query = @" query { starship(id: ""3001"") {name, length} } ";
-      resp = await TestEnv.Client.PostAsync(query);
-      var shipName = resp.data.starship.name;
+      query = @" query ($id: ID) { 
+        starship(id: $id) {name, length} 
+       } ";
+      var vars = new Dictionary<string, object>() { { "id", "3001" } };
+      response = await TestEnv.Client.PostAsync(query, vars);
+      var shipName = response.data.starship.name;
       Assert.AreEqual("X-Wing", shipName);
 
       // character query with friends, using variable
@@ -46,12 +53,12 @@ namespace StarWars.Tests {
     friends { name }
   }
 }";
-      var vars = new Dictionary<string, object>();
+      vars = new Dictionary<string, object>();
       vars["id"] = "1003";
-      resp = await TestEnv.Client.PostAsync(query, vars);
-      var lname = resp.data.leia.name;
+      response = await TestEnv.Client.PostAsync(query, vars);
+      var lname = response.data.leia.name;
       Assert.AreEqual("Leia Organa", lname);
-      var leiaFriends = resp.data.leia.friends;
+      var leiaFriends = response.data.leia.friends;
       Assert.AreEqual(4, leiaFriends.Count, "Expected 4 friends");
     }
 
