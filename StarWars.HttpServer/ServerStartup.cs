@@ -7,14 +7,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NGraphQL.Server;
 using NGraphQL.Server.AspNetCore;
-using StarWars;
 using StarWars.Api;
 
-namespace NGraphQL.TestHttpServer {
+namespace StarWars.HttpServer {
 
-  public class Startup
+  public class ServerStartup
   {
-    public Startup(IConfiguration configuration)
+    public ServerStartup(IConfiguration configuration)
     {
       Configuration = configuration;
     }
@@ -48,13 +47,10 @@ namespace NGraphQL.TestHttpServer {
     }
 
     private GraphQLHttpServer CreateGraphQLHttpServer() {
-      // create server and Http graphQL server 
       var app = new StarWarsApp();
-      var gqlServer = new GraphQLServer(app);
-      gqlServer.RegisterModules(new StarWarsApiModule());
-      gqlServer.Initialize();
-      var server = new GraphQLHttpServer(gqlServer);
-      return server;
+      var server = new GraphQLServer(app);
+      server.RegisterModules(new StarWarsApiModule());
+      return new GraphQLHttpServer(server);
     }
 
   }

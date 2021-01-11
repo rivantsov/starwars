@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NGraphQL.TestHttpServer
+namespace StarWars.HttpServer
 {
   public class Program
   {
@@ -20,7 +20,7 @@ namespace NGraphQL.TestHttpServer
         Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-              webBuilder.UseStartup<Startup>();
+              webBuilder.UseStartup<ServerStartup>();
             });
   }
 }

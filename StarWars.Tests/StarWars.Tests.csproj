@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StarWars.Api\StarWars.Api.csproj" />
+    <ProjectReference Include="..\StarWars.HttpServer\StarWars.HttpServer.csproj" />
     <ProjectReference Include="..\StarWars\StarWars.csproj" />
   </ItemGroup>
 

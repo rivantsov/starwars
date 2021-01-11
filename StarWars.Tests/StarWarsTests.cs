@@ -22,17 +22,14 @@ namespace StarWars.Tests {
     [TestMethod]
     public async Task TestBasicQueries() {
       string query;
-      ResponseData resp;
 
-      {
-        query = @" query { starships{name, length coordinates} } ";
-        var respD = await TestEnv.Client.PostAsync(query);
-        var ships0Name = respD.data.starships[0].name;
-        Assert.IsNotNull(ships0Name, "expected name");
-      }
+      query = " query { starships{name, length coordinates} } ";
+      var resp = await TestEnv.Client.PostAsync(query);
+      var ships0Name = resp.data.starships[0].name;
+      Assert.IsNotNull(ships0Name, "expected name");
 
 
-      query = @" query { starships{name, length coordinates} } ";
+      query = " query { starships{name, length coordinates} } ";
       resp = await TestEnv.Client.PostAsync(query);
       var ships = resp.data.starships;
       Assert.AreEqual(4, ships.Count, "expected 4 ships");
@@ -42,25 +39,26 @@ namespace StarWars.Tests {
       var shipName = resp.data.starship.name;
       Assert.AreEqual("X-Wing", shipName);
 
-      // character query with friends
-      query = @" {
-  leia: character(id: ""1003"") { 
+      // character query with friends, using variable
+      query = @" query($id: ID!) {
+  leia: character(id: $id) { 
     name
     friends { name }
   }
 }";
-      resp = await TestEnv.Client.PostAsync(query);
+      var vars = new Dictionary<string, object>();
+      vars["id"] = "1003";
+      resp = await TestEnv.Client.PostAsync(query, vars);
       var lname = resp.data.leia.name;
       Assert.AreEqual("Leia Organa", lname);
       var leiaFriends = resp.data.leia.friends;
       Assert.AreEqual(4, leiaFriends.Count, "Expected 4 friends");
-
     }
 
     [TestMethod]
     public async Task TestBatching() {
       string query;
-      ResponseData resp;
+
       // characters with starships (on humans only)
       query = @"
 query {
@@ -71,7 +69,7 @@ query {
     }    
   }
 }";
-      resp = await TestEnv.Client.PostAsync(query);
+      var resp = await TestEnv.Client.PostAsync(query);
       var charList = resp.data.charList;
       Assert.IsTrue(charList.Count >= 4, "at least 4 characters expected"); 
       // there are 4 humans in the list, each has 'starships' field, but there was only one call to the resolver;
@@ -80,7 +78,6 @@ query {
 
     [TestMethod]
     public async Task TestMutation() {
-      ResponseData resp;
 
       // get Jedi reviews, add review, check new count
       // 1. Get Jedi reviews, get count
@@ -88,7 +85,7 @@ query {
 {
   reviews( episode: JEDI) { episode, stars, commentary, emojis }
 }";
-      resp = await TestEnv.Client.PostAsync(getReviewsQuery);
+      var resp = await TestEnv.Client.PostAsync(getReviewsQuery);
       var jediReviews = resp.data.reviews;
       Assert.IsTrue(jediReviews.Count > 0, "Expected some review");
       var oldReviewsCount = jediReviews.Count;
@@ -111,7 +108,6 @@ mutation {
     [TestMethod]
     public async Task TestSearch() {
       string query;
-      ResponseData resp;
 
       query = @" 
 query { 
@@ -120,7 +116,7 @@ query {
     name, 
   } 
 } ";
-      resp = await TestEnv.Client.PostAsync(query);
+      var resp = await TestEnv.Client.PostAsync(query);
       var results = resp.data.search;
       // Luke SkywalkER, Darth VadER, ImpERial shuttle
       Assert.AreEqual(3, results.Count, "expected 3 objects");

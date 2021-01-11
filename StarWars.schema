@@ -1,9 +1,12 @@
+scalar Long
 scalar Double
+scalar Boolean
 scalar ID
 scalar DateTime
 scalar Date
 scalar Time
 scalar Uuid
+scalar Decimal
 
 
 "The episodes in the Star Wars trilogy"
@@ -68,7 +71,7 @@ input ReviewInput {
   stars: Int!
 
   "Comment about the movie, optional"
-  commentary: String!
+  commentary: String
   emojis: [Emojis!]!
 }
 
@@ -123,6 +126,8 @@ type Droid implements Character {
   primaryFunction: String!
 }
 
+
+"A starship."
 type Starship {
 
   "Length of the starship, along the longest axis"
@@ -157,7 +162,7 @@ type Query {
   character (id: ID!): Character!
   reviews (episode: Episode!): [Review!]!
   search (text: String!): [SearchResult!]!
-  episodes: Episode!
+  episodes: [Episode!]!
   starships: [Starship!]!
 }
 

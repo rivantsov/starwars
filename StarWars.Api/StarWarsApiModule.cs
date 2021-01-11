@@ -24,8 +24,6 @@ namespace StarWars.Api {
       MapEntity<Droid>().To<Droid_>();
       MapEntity<Starship>().To<Starship_>();
       MapEntity<Review>().To<Review_>();
-      // MapEntity<Character>().To<ICharacter_>();
-      // MapEntity<NamedObject>().ToUnion<SearchResult_>();
       
     } //constructor  
 

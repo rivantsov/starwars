@@ -23,9 +23,6 @@ namespace StarWars.Tests {
     public static GraphQLClient Client;
 
     public static string LogFilePath = "_starWarsTests.log";
-    private static JsonSerializerSettings _serializerSettings;
-
-
     static IWebHost _webHost;
 
     public static void Initialize() {
@@ -34,20 +31,13 @@ namespace StarWars.Tests {
       if (File.Exists(LogFilePath))
         File.Delete(LogFilePath);
 
-      _serializerSettings = new JsonSerializerSettings() {
-        Formatting = Formatting.Indented,
-        ContractResolver = new DefaultContractResolver() { NamingStrategy = new CamelCaseNamingStrategy() }
-      };
-      _serializerSettings.Converters.Add(new StringEnumConverter()); // enums as strings, not ints
-
       // create server and Http graphQL server 
       var app = new StarWarsApp();
       var starWarsServer = new GraphQLServer(app);
       starWarsServer.RegisterModules(new StarWarsApiModule());
-      starWarsServer.Initialize();
       StarWarsHttpServer = new GraphQLHttpServer(starWarsServer);
-
       StartWebHost();
+
       Client = new GraphQLClient(GraphQLEndPointUrl);
       Client.RequestCompleted += Client_RequestCompleted;
     }
@@ -55,9 +45,8 @@ namespace StarWars.Tests {
     private static void StartWebHost() {
       var hostBuilder = WebHost.CreateDefaultBuilder()
           .ConfigureAppConfiguration((context, config) => { })
-          .UseStartup<TestStartup>()
-          .UseUrls(ServiceUrl)
-          ;
+          .UseStartup<HttpServer.ServerStartup>()
+          .UseUrls(ServiceUrl);
       _webHost = hostBuilder.Build();
       Task.Run(() => _webHost.Run());
       Debug.WriteLine("The service is running on URL: " + ServiceUrl);
