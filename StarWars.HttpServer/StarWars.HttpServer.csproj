@@ -6,9 +6,9 @@
 
   <ItemGroup>
     <PackageReference Include="GraphQL.Server.Ui.GraphiQL" Version="4.4.0" />
-    <PackageReference Include="NGraphQL" Version="1.0.0" />
-    <PackageReference Include="NGraphQL.Server" Version="1.0.0" />
-    <PackageReference Include="NGraphQL.Server.AspNetCore" Version="1.0.0" />
+    <PackageReference Include="NGraphQL" Version="1.1.0" />
+    <PackageReference Include="NGraphQL.Server" Version="1.1.0" />
+    <PackageReference Include="NGraphQL.Server.AspNetCore" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>

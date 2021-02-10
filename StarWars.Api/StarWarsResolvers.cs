@@ -96,7 +96,7 @@ namespace StarWars.Api {
       //  the engine will use this dictionary to lookup values and will not call resolver anymore
       var allParents = fieldContext.GetAllParentEntities<Human>();
       var shipsByHuman = allParents.ToDictionary(h => h, h => h.Starships); //  _app.GetFriendLists(allParents);
-      fieldContext.SetBatchedResults<Human, IList<Starship>>(shipsByHuman);
+      fieldContext.SetBatchedResults<Human, IList<Starship>>(shipsByHuman, new List<Starship>());
       return null; // the engine will use batch results dict to lookup the value
     }
     
