@@ -19,6 +19,7 @@ namespace StarWars.HttpServer {
     }
 
     public IConfiguration Configuration { get; }
+    GraphQLHttpServer _graphQLHttpServer;
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -36,15 +37,20 @@ namespace StarWars.HttpServer {
       app.UseRouting();
 
       // create server and configure GraphQL endpoints
-      var server = CreateGraphQLHttpServer(); 
+      _graphQLHttpServer = CreateGraphQLHttpServer(); 
       app.UseEndpoints(endpoints => {
-        endpoints.MapPost("graphql", async context => await server.HandleGraphQLHttpRequestAsync(context));
-        endpoints.MapGet("graphql", async context => await server.HandleGraphQLHttpRequestAsync(context));
-        endpoints.MapGet("graphql/schema", async context => await server.HandleGraphQLHttpRequestAsync(context));
+        endpoints.MapPost("graphql", HandleRequest);
+        endpoints.MapGet("graphql", HandleRequest);
+        endpoints.MapGet("graphql/schema", HandleRequest);
       });
       // Use GraphiQL UI
       app.UseGraphiQLServer();
     }
+
+    private Task HandleRequest(HttpContext context) {
+      return _graphQLHttpServer.HandleGraphQLHttpRequestAsync(context);
+    }
+
 
     private GraphQLHttpServer CreateGraphQLHttpServer() {
       var app = new StarWarsApp();
