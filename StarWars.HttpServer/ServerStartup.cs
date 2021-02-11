@@ -19,7 +19,6 @@ namespace StarWars.HttpServer {
     }
 
     public IConfiguration Configuration { get; }
-    GraphQLHttpServer _graphQLHttpServer;
 
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
@@ -46,6 +45,8 @@ namespace StarWars.HttpServer {
       // Use GraphiQL UI
       app.UseGraphiQLServer();
     }
+
+    GraphQLHttpServer _graphQLHttpServer;
 
     private Task HandleRequest(HttpContext context) {
       return _graphQLHttpServer.HandleGraphQLHttpRequestAsync(context);
