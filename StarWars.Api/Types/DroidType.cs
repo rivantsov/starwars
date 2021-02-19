@@ -6,7 +6,8 @@ using NGraphQL.CodeFirst;
 namespace StarWars.Api {
 
   /// <summary>An autonomous mechanical character in the Star Wars universe </summary>
-  public class Droid_ : ICharacter_ {
+  [GraphQLName("Droid")]
+  public class DroidType : ICharacter {
     /// <summary>The ID of the droid</summary>
     [Scalar("ID")]
     public string Id { get; set; }
@@ -15,7 +16,7 @@ namespace StarWars.Api {
     public string Name { get; set; }
 
     /// <summary>This droid&apos;s friends, or an empty list if they have none</summary>
-    public IList<ICharacter_> Friends { get; }
+    public IList<ICharacter> Friends { get; }
 
     /// <summary>The movies this droid appears in</summary>
     public IList<Episode> AppearsIn { get; }

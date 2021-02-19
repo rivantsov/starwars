@@ -72,9 +72,9 @@ namespace StarWars.Api {
 
     // We return Union instances here, we wrap raw result objects into SearchResult_ objects, 
     //  but we could also return objects (see SearchSimple). So return type may be IList<object>
-    public IList<SearchResult_> Search(IFieldContext fieldContext, string text) { 
+    public IList<SearchResult> Search(IFieldContext fieldContext, string text) { 
       var results = _app.Search(text)
-                        .Select(r => new SearchResult_() { Value = r })
+                        .Select(r => new SearchResult() { Value = r })
                         .ToList();
       return results;
     }
@@ -85,7 +85,7 @@ namespace StarWars.Api {
     }
 
     // Mutations
-    public Review CreateReview(IFieldContext fieldContext, Episode episode, ReviewInput_ reviewInput) {
+    public Review CreateReview(IFieldContext fieldContext, Episode episode, ReviewInput reviewInput) {
       return _app.CreateReview(episode, reviewInput.Stars, reviewInput.Commentary, reviewInput.Emojis); 
     }
 

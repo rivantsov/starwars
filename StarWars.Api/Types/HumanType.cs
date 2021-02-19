@@ -6,7 +6,8 @@ using NGraphQL.CodeFirst;
 namespace StarWars.Api {
 
   /// <summary>A humanoid creature from the Star Wars universe </summary>
-  public class Human_ : ICharacter_ {
+  [GraphQLName("Human")]
+  public class HumanType : ICharacter {
 
     /// <summary>The ID of the human </summary>
     [Scalar("ID")]
@@ -16,7 +17,7 @@ namespace StarWars.Api {
     public string Name { get; set; }
 
     /// <summary>This human&apos;s friends, or an empty list if they have none </summary>
-    public IList<ICharacter_> Friends { get; }
+    public IList<ICharacter> Friends { get; }
 
     /// <summary>The movies this human appears in </summary>
     public IList<Episode> AppearsIn { get; }
@@ -33,7 +34,7 @@ namespace StarWars.Api {
 
     /// <summary>A list of starships this person has piloted, or an empty list if none </summary>
     [Resolver(nameof(StarWarsResolvers.GetStarshipsBatched))] 
-    public IList<Starship_> Starships { get; }
+    public IList<StarshipType> Starships { get; }
 
   }
 

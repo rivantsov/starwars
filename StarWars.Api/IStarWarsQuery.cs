@@ -13,21 +13,21 @@ namespace StarWars.Api {
 
     /// <summary>List of all starships.</summary>
     [Resolver("GetStarships")]
-    IList<Starship_> Starships { get; }
+    IList<StarshipType> Starships { get; }
 
     [GraphQLName("starship"), Resolver(nameof(StarWarsResolvers.GetStarshipAsync))]
-    Starship_ GetStarship([Scalar("ID")] string id);
+    StarshipType GetStarship([Scalar("ID")] string id);
 
     [GraphQLName("characters")]
-    IList<ICharacter_> GetCharacters(Episode episode);
+    IList<ICharacter> GetCharacters(Episode episode);
 
     [GraphQLName("character")]
-    ICharacter_ GetCharacter([Scalar("ID")] string id);
+    ICharacter GetCharacter([Scalar("ID")] string id);
 
     [GraphQLName("reviews")]
-    IList<Review_> GetReviews(Episode episode);
+    IList<ReviewType> GetReviews(Episode episode);
 
     [Resolver(nameof(StarWarsResolvers.Search))]
-    IList<SearchResult_> Search(string text);
+    IList<SearchResult> Search(string text);
   }
 }

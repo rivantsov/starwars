@@ -34,8 +34,8 @@ namespace StarWars.Tests {
         Trace.WriteLine($"Starship {sh.name}, length: {sh.length}");
       }
       // Strongly typed objects
-      var shipArr = response.GetTopField<Starship_[]>("starships");
-      Starship_ s0 = shipArr[0];
+      var shipArr = response.GetTopField<StarshipType[]>("starships");
+      StarshipType s0 = shipArr[0];
       Assert.IsNotNull(s0, "Expected starship object.");
 
       query = @" query ($id: ID) { 

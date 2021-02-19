@@ -7,7 +7,7 @@ using NGraphQL.CodeFirst;
 namespace StarWars.Api {
 
   /// <summary>A character from the Star Wars universe </summary>
-  public interface ICharacter_ {
+  public interface ICharacter {
 
     /// <summary>The ID of the character </summary>
     [Scalar("ID")]
@@ -17,7 +17,7 @@ namespace StarWars.Api {
     string Name { get; set; }
 
     /// <summary>The friends of the character, or an empty list if they have none </summary>
-    IList<ICharacter_> Friends { get; }
+    IList<ICharacter> Friends { get; }
 
     /// <summary>The movies this character appears in </summary>
     IList<Episode> AppearsIn { get; }

@@ -38,6 +38,11 @@ namespace StarWars.Tests {
       StarWarsHttpServer = new GraphQLHttpServer(starWarsServer);
       StartWebHost();
 
+      // Write schema doc to file
+      var schemaDoc = starWarsServer.Model.SchemaDoc;
+      File.WriteAllText("_starWarsSchema.txt", schemaDoc);
+
+
       Client = new GraphQLClient(GraphQLEndPointUrl);
       Client.RequestCompleted += Client_RequestCompleted;
     }
