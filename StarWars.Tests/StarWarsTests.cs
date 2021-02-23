@@ -9,6 +9,7 @@ using NGraphQL.Utilities;
 using StarWars.Api;
 using NGraphQL.Client;
 using System.Diagnostics;
+using NGraphQL.Introspection;
 
 namespace StarWars.Tests {
   using TDict = IDictionary<string, object>;
@@ -30,7 +31,7 @@ namespace StarWars.Tests {
       Assert.AreEqual(4, ships.Count, "expected 4 ships");
       var ship0Name = ships[0].name;
       Assert.IsNotNull(ship0Name, "expected name");
-      foreach(var sh in ships) {
+      foreach (var sh in ships) {
         Trace.WriteLine($"Starship {sh.name}, length: {sh.length}");
       }
       // Strongly typed objects
@@ -78,7 +79,7 @@ query {
 }";
       var resp = await TestEnv.Client.PostAsync(query);
       var charList = resp.data.charList;
-      Assert.IsTrue(charList.Count >= 4, "at least 4 characters expected"); 
+      Assert.IsTrue(charList.Count >= 4, "at least 4 characters expected");
       // there are 4 humans in the list, each has 'starships' field, but there was only one call to the resolver;
       //  the resolver does batched retrieval. 
     }
@@ -129,5 +130,40 @@ query {
       Assert.AreEqual(3, results.Count, "expected 3 objects");
     }
 
+
+    [TestMethod]
+    public async Task TestIntrospection() {
+      TestEnv.LogTestMethodStart();
+      TestEnv.LogTestDescr(" retriving starship and its type name");
+
+      var query = @"
+query { 
+  starship(id: ""3001"") {
+    name 
+    length
+    __typename
+  } 
+} ";
+      var resp = await TestEnv.Client.PostAsync(query);
+      resp.EnsureNoErrors();
+      var ship = resp.data.starship;
+      Assert.IsNotNull(ship);
+      var typeName = ship.__typename;
+      Assert.AreEqual("Starship", typeName);
+
+      TestEnv.LogTestDescr("Retrieving Starhip type.");
+      query = @"
+query { 
+  type: __type(name: ""Starship"") {
+    name 
+    kind
+  } 
+} ";
+      resp = await TestEnv.Client.PostAsync(query);
+      resp.EnsureNoErrors();
+      var type = resp.GetTopField<__Type>("type");
+      Assert.IsNotNull(type);
+      Assert.AreEqual(TypeKind.Object, type.Kind);
+    }
   }
 }
