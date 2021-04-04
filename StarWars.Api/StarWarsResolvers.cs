@@ -91,12 +91,12 @@ namespace StarWars.Api {
 
     // batched version of GetStarships
     public IList<Starship> GetStarshipsBatched(IFieldContext fieldContext, Human human) {
-      // batch execution (aka DataLoader); we retrieve all pending parents (humans),
+      // batch execution; we retrieve all pending parents (humans),
       //  get all their starships to a dictionary, and then post it back into context - 
       //  the engine will use this dictionary to lookup values and will not call resolver anymore
       var allParents = fieldContext.GetAllParentEntities<Human>();
-      var shipsByHuman = allParents.ToDictionary(h => h, h => h.Starships); //  _app.GetFriendLists(allParents);
-      fieldContext.SetBatchedResults<Human, IList<Starship>>(shipsByHuman, new List<Starship>());
+      var shipsByHuman = allParents.ToDictionary(h => h, h => h.Starships); 
+      fieldContext.SetBatchedResults<Human, IList<Starship>>(shipsByHuman, valueForMissingKeys: new List<Starship>());
       return null; // the engine will use batch results dict to lookup the value
     }
     
