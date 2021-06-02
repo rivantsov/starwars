@@ -17,7 +17,7 @@ namespace StarWars.Api {
       this.MutationType = typeof(IStarWarsMutation);
 
       // Register resolver class
-      this.ResolverTypes.Add(typeof(StarWarsResolvers));
+      this.ResolverClasses.Add(typeof(StarWarsResolvers));
 
       // map app entity types to GraphQL Api types
       MapEntity<Human>().To<HumanType>(h => new HumanType() {

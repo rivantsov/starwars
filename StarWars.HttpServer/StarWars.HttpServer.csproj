@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GraphQL.Server.Ui.GraphiQL" Version="4.4.0" />
-    <PackageReference Include="NGraphQL" Version="1.1.2" />
-    <PackageReference Include="NGraphQL.Server" Version="1.1.2" />
-    <PackageReference Include="NGraphQL.Server.AspNetCore" Version="1.1.2" />
+    <PackageReference Include="GraphQL.Server.Ui.GraphiQL" Version="5.0.2" />
+    <PackageReference Include="NGraphQL" Version="1.2.0" />
+    <PackageReference Include="NGraphQL.Server" Version="1.2.0" />
+    <PackageReference Include="NGraphQL.Server.AspNetCore" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
